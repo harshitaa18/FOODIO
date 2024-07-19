@@ -290,17 +290,21 @@ app.post('/sendConfirmationEmail', async (req, res) => {
 
     // Create transporter using nodemailer
     const transporter = nodemailer.createTransport({
-        host: process.env.ETHEREAL_HOST,
-        port: process.env.ETHEREAL_PORT,
+        service: 'gmail',
+        host: process.env.GMAIL_HOST,
+        port: process.env.GMAIL_PORT,
         auth: {
-            user: process.env.ETHEREAL_USER,
-            pass: process.env.ETHEREAL_PASS
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASS
         }
     });
 
     // Email content
     let mailOptions = {
-        from: 'foodio@gmail.com',
+        from: {
+            name: 'foodio',
+            address: process.env.GMAIL_USER
+        },
         to: email,
         subject: 'Reservation Confirmation',
         html: `<p>Your reservation has been confirmed!</p>
@@ -328,17 +332,21 @@ app.post('/processPayment', async (req, res) => {
 
     // Create transporter using nodemailer
     const transporter = nodemailer.createTransport({
-        host: process.env.ETHEREAL_HOST,
-        port: process.env.ETHEREAL_PORT,
+        service: 'gmail',
+        host: process.env.GMAIL_HOST,
+        port: process.env.GMAIL_PORT,
         auth: {
-            user: process.env.ETHEREAL_USER,
-            pass: process.env.ETHEREAL_PASS
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASS
         }
     });
 
     // Email content
     let mailOptions = {
-        from: 'foodio@gmail.com',
+        from: {
+            name: 'foodio',
+            address: process.env.GMAIL_USER
+        },
         to: email,
         subject: 'Order Confirmation',
             html: ` <h2>Thank you so much for your purchase</h2>
