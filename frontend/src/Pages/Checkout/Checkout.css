@@ -1,0 +1,100 @@
+.checkout {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.checkout h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.checkout-details {
+    margin-bottom: 20px;
+}
+
+.checkout-details h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.checkout-details input[type="text"],
+.checkout-details input[type="number"],
+.checkout-details input[type="email"],
+.checkout-details textarea {
+    width: calc(100% - 20px); /* Adjusted width */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.checkout-details textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.payment-methods {
+    margin-top: 10px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.payment-option input[type="radio"] {
+    display: none; /* Hide the actual radio button */
+}
+
+.payment-option span {
+    padding-left: 30px; /* Adjusted padding */
+    line-height: 20px; /* Adjusted line-height */
+    position: relative;
+}
+
+.payment-option span::before {
+    content: "";
+    display: inline-block;
+    width: 18px; /* Adjusted size */
+    height: 18px; /* Adjusted size */
+    border: 1px solid #ccc;
+    border-radius: 50%; /* Makes it circular */
+    position: absolute;
+    left: 0;
+    top: 1px;
+}
+
+.payment-option input[type="radio"]:checked + span::before {
+    background-color: green; /* Color of tick when selected */
+}
+
+.payment-option.selected span::before {
+    background-color: #FF4141; /* Color of tick when selected */
+}
+
+.checkout-details button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background-color: #FF4141;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.checkout-details button:hover {
+    background-color: #45a049;
+}

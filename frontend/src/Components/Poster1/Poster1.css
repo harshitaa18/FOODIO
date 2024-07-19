@@ -1,0 +1,46 @@
+.poster1{
+    background: #e7f7ed;
+    display: flex;
+    padding: 40px;
+}
+.poster1-left img{
+    width: 860px;
+    height: 650px;
+}
+.poster1-right h1{
+    font-size: 72px;
+    font-weight: 600;
+    animation: fadeInUp 1s ease-out forwards;
+}
+.poster1-right h1 span{
+    color: #f54748 ;
+    animation: fadeInUp 1s ease-out forwards;
+}
+.poster1-right p{
+    color: #5c4529;
+    font-size: 20px;
+    font-weight: 400;
+    padding-right: 50px;
+    margin-top: 20px;
+}
+.poster1-right button{
+    margin-top: 30px;
+    min-width: 232px;
+    height: 74px;
+    background: #f54748;
+    color: #ffffff ;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

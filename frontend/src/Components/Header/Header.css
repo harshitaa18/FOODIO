@@ -1,0 +1,77 @@
+.header {
+    display: flex;
+    justify-content: space-around;
+    padding: 16px;
+    height: 15vh;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.logo p {
+    color: #171717;
+    font-size: 25px;
+    font-weight: 600;
+}
+.logo img {
+    height: 60px;
+    width: 60px;
+    transform: rotate(-30deg);
+}
+.header-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 40px;
+    font-size: 20px;
+    font-weight: 400;
+}
+.header-menu li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+}
+.header-menu li a {
+    color: #626262; 
+}
+.header-menu li.active a {
+    color: #FF4141;
+}
+.header-menu li.active {
+    padding-bottom: 4px;
+    border-bottom: 2px solid #FF4141;
+}
+.side-buttons {
+    margin-top: 25px;
+    outline: none;
+    cursor: pointer;
+}
+.cart {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    border: none;
+    margin-right: 20px;
+}
+.button {
+    width: 130px;
+    height: 48px;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    background: rgb(247, 35, 35);
+}
+.cart:hover {
+    background: #d0ccc719;
+}
+.button:hover {
+    background: #f3f3f3;
+    color: rgb(247, 35, 35);
+}

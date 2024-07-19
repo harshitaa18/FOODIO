@@ -1,0 +1,92 @@
+.reservation-confirm, .reservation-confirmm {
+    margin: 20px auto;
+    width: 900px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-confirm h1 {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.upper-part {
+    margin-top: 20px;
+    display: flex;
+    height: 120px;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: white;
+    padding-left: 40px;
+}
+.grp {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.grp i {
+    margin-right: 10px;
+}
+
+.grp h1 {
+    font-size: 27px;
+}
+
+.grp p {
+    font-size: 16px;
+}
+
+.reservation-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding-top: 20px;
+}
+
+.reservation-buttons button {
+    padding: 17px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 160px;
+    background: #ff000019 ;
+    color: #ea1010 ;
+}
+.reservation-buttons i{
+    padding-left: 9px;
+    font-size: 20px;
+}
+.reservation-buttons button:hover {
+    background-color: lightblue;
+}
+.reservation-confirmm p{
+    height: 80px;
+    text-align: center;
+    padding-top: 30px;
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+}
+.reservation-confirmm h1{
+   text-align: center;
+   padding: 20px;
+}
+.reservation-confirmm button{
+    margin-top: 30px;
+    min-width: 200px;
+    height: 50px;
+    background: wheat;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-left: 350px;
+}

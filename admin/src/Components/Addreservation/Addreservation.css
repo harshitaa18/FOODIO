@@ -1,0 +1,39 @@
+/* Addreservation.css */
+
+.add-reservation {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+    background: white;
+}
+
+.add-reservation h2 {
+    padding-top: 20px;
+    text-align: center;
+    color: green;
+}
+
+.add-reservation table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.add-reservation th,
+.add-reservation td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.add-reservation th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.add-reservation tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.add-reservation tr:hover {
+    background-color: #f1f1f1;
+}

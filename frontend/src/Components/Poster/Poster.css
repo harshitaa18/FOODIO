@@ -1,0 +1,126 @@
+.poster {
+    height: 100vh;
+    display: flex;
+    background: linear-gradient(0deg, #f7f7f7 23.8%, #fcdddd 92%);
+}
+
+.poster-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 180px;
+    line-height: 1.4;
+}
+
+.poster-left h1 {
+    padding-top: 20px;
+    align-items: baseline;
+    font-size: 77px;
+    font-weight: 600;
+    animation: fadeIn 3s ease-in-out;
+}
+
+.poster-left h1 span {
+    color: #f54748;
+}
+
+.poster-left p {
+    font-size: 20px;
+    color: #5c4429;
+    line-height: 1.9;
+}
+
+.keyy button {
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 220px;
+    height: 70px;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.link-style {
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+}
+
+.batty1 {
+    color: #ffffff;
+    background: #f54748;
+}
+
+.batty2 {
+    margin-left: 40px;
+    background: #f5474819;
+    color: #f54748;
+}
+
+.poster-right {
+    display: flex;
+    padding-left: 180px;
+    width: 47%;
+    height: 502px;
+    padding-top: 20px;
+    margin-right: 120px;
+}
+
+.key button:hover {
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Adjustments */
+
+@media (max-width: 1200px) {
+    .poster-left {
+        padding-left: 100px;
+    }
+    .poster-right {
+        padding-left: 100px;
+    }
+    .poster-right {
+        width: 50%;
+    }
+}
+
+@media (max-width: 992px) {
+    .poster-left {
+        padding-left: 50px;
+    }
+    .poster-right {
+        display: none; /* Hide the right section on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .poster-left h1 {
+        font-size: 50px; /* Adjust font size for smaller screens */
+    }
+    .poster-left p {
+        font-size: 18px; /* Adjust font size for smaller screens */
+    }
+    .poster-left {
+        padding-left: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .poster-left h1 {
+        font-size: 40px; /* Further adjust font size for smaller screens */
+    }
+    .poster-left p {
+        font-size: 16px; /* Further adjust font size for smaller screens */
+    }
+}

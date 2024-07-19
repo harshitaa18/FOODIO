@@ -1,0 +1,36 @@
+.listproduct{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+    height: 100%;
+    padding: 10px 50px;
+    margin: 30px;
+    border-radius: 6px;
+    background: white;
+}
+.format{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 70px;
+    width: 100%;
+    padding: 20px 0px;
+    color: #454545;
+    font-size: 15px;
+    font-weight: 600;
+}
+.list-format{
+    align-items: center;
+    font-weight: 500;
+}
+.list-icon{
+    height: 80px;
+    width: 100px;
+}
+.list-icon-remove{
+    cursor: pointer;
+    margin: auto;
+}
+.listall{
+    overflow-y: auto;
+}
