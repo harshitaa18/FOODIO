@@ -1,4 +1,5 @@
-const port = 4000;
+require('dotenv').config();
+const port = process.env.PORT || 4000;
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -13,7 +14,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-mongoose.connect("mongodb+srv://harshita:A9eXGuBY4FUn2tsu@cluster0.woqucfb.mongodb.net/Foodio");
+const dbURI = process.env.MONGODB_URI;
+
+mongoose.connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('Database connected successfully'))
+  .catch(err => console.error('Database connection error:', err));
 
 //api creation
 app.get("/",(req,res)=>{
@@ -282,11 +290,11 @@ app.post('/sendConfirmationEmail', async (req, res) => {
 
     // Create transporter using nodemailer
     const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
+        host: process.env.ETHEREAL_HOST,
+        port: process.env.ETHEREAL_PORT,
         auth: {
-            user: 'devonte.paucek84@ethereal.email',
-            pass: 'Krb6Tv4Beh5MUEc2HW'
+            user: process.env.ETHEREAL_USER,
+            pass: process.env.ETHEREAL_PASS
         }
     });
 
@@ -320,11 +328,11 @@ app.post('/processPayment', async (req, res) => {
 
     // Create transporter using nodemailer
     const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
+        host: process.env.ETHEREAL_HOST,
+        port: process.env.ETHEREAL_PORT,
         auth: {
-            user: 'devonte.paucek84@ethereal.email',
-            pass: 'Krb6Tv4Beh5MUEc2HW'
+            user: process.env.ETHEREAL_USER,
+            pass: process.env.ETHEREAL_PASS
         }
     });
 
@@ -354,8 +362,8 @@ app.post('/processPayment', async (req, res) => {
 });
 
 const razorpay = new Razorpay({
-    key_id: 'rzp_test_093iaYQK2ilZ2b', 
-    key_secret: 'xi4svKnf1p2v1mq1yJqWfX0r' 
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
 app.post('/createOrder', async (req, res) => {
