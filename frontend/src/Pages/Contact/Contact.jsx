@@ -11,6 +11,7 @@ const ContactUs = () => {
     });
 
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,8 +23,27 @@ const ContactUs = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission (e.g., send data to backend)
-        setSubmitted(true);
+        setLoading(true);
+
+        fetch('http://localhost:4000/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                setLoading(false);
+                setSubmitted(true);
+                
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                setLoading(false);
+                alert('Your message has been sent successfully!');
+            });
     };
 
     return (
@@ -36,6 +56,10 @@ const ContactUs = () => {
                         <div className="thank-you-message">
                             <h2>Thank You!</h2>
                             <p>Your message has been sent successfully. We will get back to you soon.</p>
+                        </div>
+                    ) : loading ? (
+                        <div className="loading-message">
+                            <p>Sending your message...</p>
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="contact-form">

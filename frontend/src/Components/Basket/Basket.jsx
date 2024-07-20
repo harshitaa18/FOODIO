@@ -11,14 +11,15 @@ const Basket = () => {
     const [checkoutError, setCheckoutError] = useState(null);
 
     const handleApplyVoucher = () => {
-        try {
-            applyVoucher(enteredVoucher.toUpperCase());
-            setEnteredVoucher("");
-        } catch (error) {
-            console.error('Error applying voucher:', error);
-            // Handle error, e.g., display error message to user
+        const success = applyVoucher(enteredVoucher.toUpperCase());
+        setEnteredVoucher(""); // Clear the input field
+    
+        if (success) {
+            alert('Voucher applied successfully!');
+        } else {
+            alert('Failed to apply voucher. Please check the code and try again.');
         }
-    };
+    };    
 
     const handleCheckout = () => {
         try {

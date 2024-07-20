@@ -157,10 +157,12 @@ const ShopContextProvider = (props) => {
             // Set discount amount based on voucher code
             setVoucherCode(code);
             setVoucherDiscount(5); // Example discount amount
+            return true;
         } else {
             // Invalid voucher code
             setVoucherCode("");
             setVoucherDiscount(0);
+            return false;
         }
     };
 

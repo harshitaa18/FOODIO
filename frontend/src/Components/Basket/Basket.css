@@ -1,7 +1,8 @@
-.basket{
+.basket {
     padding: 70px;
 }
-.basket-title{
+
+.basket-title {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
     align-items: center;
@@ -9,73 +10,87 @@
     font-size: 20px;
     font-weight: 500;
 }
-.basket-items-item{
+
+.basket-items-item {
     margin: 10px 0px;
     color: black;
 }
-.basket-items-item img{
+
+.basket-items-item img {
     width: 70px;
 }
-.basket hr{
+
+.basket hr {
     height: 1px;
     background-color: #e2e2e2;
     border: none;
 }
-.icons{
+
+.icons {
     display: flex;
     align-items: center;
 }
-.icons img{
+
+.icons img {
     width: 20px;
     height: 20px;
     cursor: pointer;
     margin: 0 15px;
 }
-.basket-bottom{
+
+.basket-bottom {
     margin-top: 80px;
     display: flex;
     justify-content: space-between;
-    gap: max(12vw,20px);
+    gap: max(12vw, 20px);
 }
-.basket-total{
+
+.basket-total {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.basket-total-details{
+
+.basket-total-details {
     display: flex;
     justify-content: space-between;
     color: #555;
 }
-.basket-total hr{
+
+.basket-total hr {
     margin: 10px 0px;
 }
-.basket-total button{
+
+.basket-total button {
     border: none;
     height: 50px;
     background: #f54748;
-    color: #ffffff ;
-    width: max(15vw,200px);
+    color: #ffffff;
+    width: max(15vw, 200px);
     padding: 12px 0px;
     cursor: pointer;
     border-radius: 10px;
     font-size: 20px;
     font-weight: 500;
 }
-.voucher{
+
+.voucher {
     flex: 1;
 }
-.voucher p{
+
+.voucher p {
     color: #555;
 }
-.voucher-add{
+
+.voucher-add {
     margin-top: 20px;
     display: flex;
     align-items: center;
     gap: 30px;
 }
-.voucher-add input{
+
+.voucher-add input {
     background-color: #eaeaea;
     border-radius: 4px;
     border: none;
@@ -83,11 +98,97 @@
     width: 250px;
     padding-left: 20px;
 }
-.voucher-add button{
+
+.voucher-add button {
     width: 40px;
     height: 40px;
-    background: #53a5e0 ;
+    background: #53a5e0;
     border: none;
     font-size: 28px;
     color: white;
+}
+
+/* Responsive Design */
+
+@media (max-width: 1200px) {
+    .basket-title {
+        grid-template-columns: 1fr 1.2fr 1fr 1fr 1fr 0.5fr;
+        font-size: 18px;
+    }
+
+    .basket-total button {
+        width: max(20vw, 180px);
+    }
+
+    .voucher-add input {
+        width: 200px;
+    }
+}
+
+@media (max-width: 992px) {
+    .basket-title {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        font-size: 16px;
+    }
+
+    .basket-bottom {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .basket-total button {
+        width: 100%;
+    }
+
+    .voucher-add {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .voucher-add input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .basket-title {
+        display: none;
+    }
+
+    .basket-items-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .basket-items-item img {
+        width: 50px;
+    }
+
+    .basket-total button {
+        font-size: 18px;
+    }
+
+    .voucher-add input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .basket {
+        padding: 20px;
+    }
+
+    .basket-title {
+        font-size: 14px;
+    }
+
+    .basket-total button {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .voucher-add input {
+        width: 100%;
+        padding-left: 10px;
+    }
 }

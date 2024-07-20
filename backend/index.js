@@ -285,19 +285,19 @@ app.post('/delete-reservation', async (req,res)=>{
     res.json({ message: 'Reservation deleted successfully' });
 })
 
+// Create transporter using nodemailer
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: process.env.GMAIL_HOST,
+    port: process.env.GMAIL_PORT,
+    auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS
+    }
+});
+
 app.post('/sendConfirmationEmail', async (req, res) => {
     const { email, bookingDetails } = req.body;
-
-    // Create transporter using nodemailer
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        host: process.env.GMAIL_HOST,
-        port: process.env.GMAIL_PORT,
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_PASS
-        }
-    });
 
     // Email content
     let mailOptions = {
@@ -330,17 +330,6 @@ app.post('/sendConfirmationEmail', async (req, res) => {
 app.post('/processPayment', async (req, res) => {
     const { email, cartItems, totalPrice } = req.body;
 
-    // Create transporter using nodemailer
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        host: process.env.GMAIL_HOST,
-        port: process.env.GMAIL_PORT,
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_PASS
-        }
-    });
-
     // Email content
     let mailOptions = {
         from: {
@@ -353,6 +342,33 @@ app.post('/processPayment', async (req, res) => {
                     <p>Your order has been confirmed! You will receive your order as soon as possible.</p>
                     <p>Purchased items: ${JSON.stringify(cartItems)}</p>
                     <p>Total Price: $${totalPrice}</p>`
+    };
+
+    try {
+        // Send email
+        let info = await transporter.sendMail(mailOptions);
+        
+        console.log('Message sent: %s', info.messageId);
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info)); // Log preview URL
+        
+        res.status(200).send('Confirmation email sent'); // Send success response to client
+    } catch (error) {
+        console.error('Error sending confirmation email:', error);
+        res.status(500).send('Error sending confirmation email'); // Send error response to client
+    }
+});
+
+app.post('/send', async (req, res) => {
+    const { name, email, subject, message } = req.body;
+
+    const mailOptions = {
+        from: email,
+        to: {
+            name: 'foodio',
+            address: process.env.GMAIL_USER
+        },
+        subject: `Contact Form Submission: ${subject}`,
+        text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
     };
 
     try {

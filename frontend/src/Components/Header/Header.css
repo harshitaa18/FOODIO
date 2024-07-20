@@ -4,21 +4,25 @@
     padding: 16px;
     height: 15vh;
 }
+
 .logo {
     display: flex;
     align-items: center;
     gap: 4px;
 }
+
 .logo p {
     color: #171717;
     font-size: 25px;
     font-weight: 600;
 }
+
 .logo img {
     height: 60px;
     width: 60px;
     transform: rotate(-30deg);
 }
+
 .header-menu {
     display: flex;
     align-items: center;
@@ -27,6 +31,7 @@
     font-size: 20px;
     font-weight: 400;
 }
+
 .header-menu li {
     display: flex;
     flex-direction: column;
@@ -35,21 +40,26 @@
     gap: 3px;
     cursor: pointer;
 }
+
 .header-menu li a {
     color: #626262; 
 }
+
 .header-menu li.active a {
     color: #FF4141;
 }
+
 .header-menu li.active {
     padding-bottom: 4px;
     border-bottom: 2px solid #FF4141;
 }
+
 .side-buttons {
     margin-top: 25px;
     outline: none;
     cursor: pointer;
 }
+
 .cart {
     width: 50px;
     height: 50px;
@@ -58,6 +68,7 @@
     border: none;
     margin-right: 20px;
 }
+
 .button {
     width: 130px;
     height: 48px;
@@ -68,10 +79,75 @@
     font-weight: 600;
     background: rgb(247, 35, 35);
 }
+
 .cart:hover {
     background: #d0ccc719;
 }
+
 .button:hover {
     background: #f3f3f3;
     color: rgb(247, 35, 35);
+}
+
+/* Responsive Design */
+
+@media (max-width: 1200px) {
+    .header-menu {
+        gap: 30px;
+        font-size: 18px;
+    }
+    .logo p {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 992px) {
+    .header-menu {
+        gap: 20px;
+        font-size: 16px;
+    }
+    .logo p {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+    .header-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo p {
+        font-size: 18px;
+    }
+    .side-buttons {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo img {
+        height: 50px;
+        width: 50px;
+    }
+    .logo p {
+        font-size: 16px;
+    }
+    .header-menu {
+        font-size: 14px;
+    }
+    .cart {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    .button {
+        width: 100px;
+        height: 40px;
+        font-size: 18px;
+    }
 }
