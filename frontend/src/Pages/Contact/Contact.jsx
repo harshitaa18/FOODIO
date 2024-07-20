@@ -25,7 +25,7 @@ const ContactUs = () => {
         e.preventDefault();
         setLoading(true);
 
-        fetch('http://localhost:4000/send', {
+        fetch('https://foodio-0x93.onrender.com/send', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

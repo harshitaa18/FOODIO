@@ -8,7 +8,7 @@ const Addreservation = () => {
     useEffect(() => {
         const fetchReservations = async () => {
             try {
-                const response = await fetch('http://localhost:4000/reservations');
+                const response = await fetch('https://foodio-0x93.onrender.com/reservations');
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }

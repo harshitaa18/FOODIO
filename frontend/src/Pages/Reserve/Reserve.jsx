@@ -44,7 +44,7 @@ const Reserve = () => {
         setError('');
         setSuccess('');
         try {
-            const response = await fetch('http://localhost:4000/reservation', {
+            const response = await fetch('https://foodio-0x93.onrender.com/reservation', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const Reserve = () => {
 
     const sendConfirmationEmail = async (bookingDetails) => {
         try {
-            const response = await fetch('http://localhost:4000/sendConfirmationEmail', {
+            const response = await fetch('https://foodio-0x93.onrender.com/sendConfirmationEmail', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

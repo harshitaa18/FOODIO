@@ -28,7 +28,7 @@ const Checkout = () => {
     const loadRazorpayScript = async () => {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+            script.src = 'https://foodio-0x93.onrender.com/v1/checkout.js';
             script.onload = () => resolve(true);
             script.onerror = () => reject(new Error('Failed to load Razorpay SDK'));
             document.body.appendChild(script);
@@ -44,7 +44,7 @@ const Checkout = () => {
                 throw new Error('Razorpay SDK failed to load. Please check your internet connection.');
             }
 
-            const orderData = await fetch('http://localhost:4000/createOrder', {
+            const orderData = await fetch('https://foodio-0x93.onrender.com/createOrder', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ const Checkout = () => {
                         totalPrice,
                     };
 
-                    const result = await fetch('http://localhost:4000/processPayment', {
+                    const result = await fetch('https://foodio-0x93.onrender.com/processPayment', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

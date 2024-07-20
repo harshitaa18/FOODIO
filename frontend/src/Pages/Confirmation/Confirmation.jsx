@@ -18,7 +18,7 @@ const Confirmation = () => {
 
     const remove_reservation = async (id) => {
         try {
-            const response = await fetch('http://localhost:4000/delete-reservation', {
+            const response = await fetch('https://foodio-0x93.onrender.com/delete-reservation', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',

@@ -18,7 +18,7 @@ const LoginPopup = () => {
     const login = async()=>{
         console.log("Login funct executed",formdata)
         let responsedata;
-        await fetch('http://localhost:4000/login',{
+        await fetch('https://foodio-0x93.onrender.com/login',{
             method: 'POST',
                 headers: {
                 Accept: 'application/form-data',
@@ -39,7 +39,7 @@ const LoginPopup = () => {
     const signup = async()=>{
         console.log("signup funct executed",formdata);
         let responsedata;
-        await fetch('http://localhost:4000/signup',{
+        await fetch('https://foodio-0x93.onrender.com/signup',{
             method: 'POST',
                 headers: {
                 Accept: 'application/form-data',

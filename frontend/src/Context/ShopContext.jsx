@@ -15,7 +15,7 @@ const ShopContextProvider = (props) => {
     const [allproduct, setallproduct] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:4000/allproducts')
+        fetch('https://foodio-0x93.onrender.com/allproducts')
             .then((resp) => {
                 if (!resp.ok) {
                     throw new Error('Network response was not ok ' + resp.statusText);
@@ -33,7 +33,7 @@ const ShopContextProvider = (props) => {
             .catch((error) => console.error("Error fetching products:", error));
 
         if (localStorage.getItem('auth-token')) {
-            fetch('http://localhost:4000/getcart', {
+            fetch('https://foodio-0x93.onrender.com/getcart', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -63,7 +63,7 @@ const ShopContextProvider = (props) => {
     const addToCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
         if (localStorage.getItem('auth-token')) {
-            fetch('http://localhost:4000/addtocart', {
+            fetch('https://foodio-0x93.onrender.com/addtocart', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -82,7 +82,7 @@ const ShopContextProvider = (props) => {
         alert(`Item ${itemId} added to cart`);
         setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
         if (localStorage.getItem('auth-token')) {
-            fetch('http://localhost:4000/addtocart', {
+            fetch('https://foodio-0x93.onrender.com/addtocart', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/form-data',
@@ -103,7 +103,7 @@ const ShopContextProvider = (props) => {
             return updatedCartItems;
         });
         if (localStorage.getItem('auth-token')) {
-            fetch('http://localhost:4000/removefromcart', {
+            fetch('https://foodio-0x93.onrender.com/removefromcart', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/form-data',
@@ -119,7 +119,7 @@ const ShopContextProvider = (props) => {
     const decre = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
         if (localStorage.getItem('auth-token')) {
-            fetch('http://localhost:4000/removefromcart', {
+            fetch('https://foodio-0x93.onrender.com/removefromcart', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/form-data',
