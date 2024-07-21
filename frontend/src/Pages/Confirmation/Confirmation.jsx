@@ -2,11 +2,9 @@ import React, { useEffect, useContext, useState } from 'react';
 import { ShopContext } from '../../Context/ShopContext';
 import './Confirmation.css';
 import Header from "../../Components/Header/Header";
-import pic1 from '../../Components/Assets/pic1.jpg';
 import bg from '../../Components/Assets/bg.jpg';
 import bgo from '../../Components/Assets/bgo.avif';
 import { Link } from 'react-router-dom';
-import { format } from 'date-fns';
 
 const Confirmation = () => {
     const { bookingDetails, setBookingDetails } = useContext(ShopContext);
