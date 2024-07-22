@@ -28,17 +28,25 @@ app.get("/",(req,res)=>{
     res.send("Express App is running")
 })
 
+const fs = require('fs');
 const storage = multer.diskStorage({
     destination: './upload/images',
-    filename:(req,file,cb)=>{
-        return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+    filename: (req, file, cb) => {
+        const filePath = `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`;
+        fs.chmodSync(filePath, 0o644);  // Ensure the file is readable
+        cb(null, filePath);
     }
-})
+});
+
 
 const upload = multer({storage:storage})
 
 //creating upload endpoint for images
-app.use('/images', express.static(path.join(__dirname, 'upload/images')));
+app.use('/images', (req, res, next) => {
+    console.log(`Serving static files from: ${path.join(__dirname, 'upload/images')}`);
+    next();
+}, express.static(path.join(__dirname, 'upload/images')));
+
 
 app.post("/upload",upload.single('product'),(req,res)=>{
     res.json({
