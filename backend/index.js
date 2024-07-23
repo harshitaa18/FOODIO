@@ -29,11 +29,19 @@ app.get("/",(req,res)=>{
 })
 
 const fs = require('fs');
+
+//creating upload endpoint for images
+const uploadDir = path.join(__dirname, 'upload/images');
+if (!fs.existsSync(uploadDir)){
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 const storage = multer.diskStorage({
-    destination: './upload/images',
+    destination: (req, file, cb) => {
+        cb(null, uploadDir);  // Use the correct directory path
+    },
     filename: (req, file, cb) => {
         const filePath = `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`;
-        fs.chmodSync(filePath, 0o644);  // Ensure the file is readable
         cb(null, filePath);
     }
 });
@@ -41,11 +49,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage:storage})
 
-//creating upload endpoint for images
-app.use('/images', (req, res, next) => {
-    console.log(`Serving static files from: ${path.join(__dirname, 'upload/images')}`);
-    next();
-}, express.static(path.join(__dirname, 'upload/images')));
+
 
 
 app.post("/upload",upload.single('product'),(req,res)=>{
@@ -87,13 +91,13 @@ const Product = mongoose.model("Product",{
     },
 })
 
-app.post('/addproduct',async (req,res)=>{
+app.post('/addproduct',upload.single('product') ,async (req,res)=>{
     let products = await Product.find({});
     let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
     const product = new Product ({
         id: id,
         name: req.body.name,
-        image: req.body.image,
+        image: req.file.filename,
         category: req.body.category,
         price: req.body.price,
     });
