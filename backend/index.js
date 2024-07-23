@@ -28,17 +28,14 @@ app.get("/",(req,res)=>{
     res.send("Express App is running")
 })
 
-const fs = require('fs');
-
-//creating upload endpoint for images
 const uploadDir = path.join(__dirname, 'upload/images');
-if (!fs.existsSync(uploadDir)){
+if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, uploadDir);  // Use the correct directory path
+        cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
         const filePath = `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`;
@@ -46,18 +43,17 @@ const storage = multer.diskStorage({
     }
 });
 
+const upload = multer({ storage: storage });
 
-const upload = multer({storage:storage})
+// Serve static files from the upload directory
+app.use('/images', express.static(uploadDir));
 
-
-
-
-app.post("/upload",upload.single('product'),(req,res)=>{
+app.post("/upload", upload.single('product'), (req, res) => {
     res.json({
-        success:1,
-        image_url:`https://foodio-0x93.onrender.com/images/${req.file.filename}`
-    })
-})
+        success: 1,
+        image_url: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    });
+});
 
 //schema for creating products
 const Product = mongoose.model("Product",{
