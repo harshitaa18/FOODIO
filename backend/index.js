@@ -9,7 +9,6 @@ const path = require('path');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const Razorpay = require('razorpay');
-const fs = require('fs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -29,14 +28,10 @@ app.get("/",(req,res)=>{
     res.send("Express App is running")
 })
 
-const uploadDir = path.join(__dirname, 'upload/images');
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
-
+const fs = require('fs');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, uploadDir);
+        cb(null, uploadDir);  // Use the correct directory path
     },
     filename: (req, file, cb) => {
         const filePath = `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`;
@@ -44,17 +39,22 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
 
-// Serve static files from the upload directory
-app.use('/images', express.static(uploadDir));
+const upload = multer({storage:storage})
 
-app.post("/upload", upload.single('product'), (req, res) => {
+//creating upload endpoint for images
+app.use('/images', (req, res, next) => {
+    console.log(`Serving static files from: ${path.join(__dirname, 'upload/images')}`);
+    next();
+}, express.static(path.join(__dirname, 'upload/images')));
+
+
+app.post("/upload",upload.single('product'),(req,res)=>{
     res.json({
-        success: 1,
-        image_url: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    });
-});
+        success:1,
+        image_url:`https://foodio-0x93.onrender.com/images/${req.file.filename}`
+    })
+})
 
 //schema for creating products
 const Product = mongoose.model("Product",{
@@ -88,7 +88,7 @@ const Product = mongoose.model("Product",{
     },
 })
 
-app.post('/addproduct',upload.single('product') ,async (req,res)=>{
+app.post('/addproduct',async (req,res)=>{
     let products = await Product.find({});
     let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
     const product = new Product ({
