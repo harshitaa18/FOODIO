@@ -86,24 +86,51 @@ const Product = mongoose.model("Product",{
     },
 })
 
-app.post('/addproduct',async (req,res)=>{
-    let products = await Product.find({});
-    let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
-    const product = new Product ({
-        id: id,
-        name: req.body.name,
-        image: req.body.image,
-        category: req.body.category,
-        price: req.body.price,
-    });
-    console.log(product);
-    await product.save();
-    console.log('saved');
-    res.json({
-        success: true,
-        name: req.body.name,
-    })
-})
+app.post('/addproduct', async (req, res) => {
+    try {
+        // Fetch existing products to determine the new product ID
+        let products = await Product.find({});
+        let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
+
+        // Ensure the filename is being received from the client
+        const { name, image_filename, category, price } = req.body;
+
+        if (!image_filename) {
+            return res.status(400).json({
+                success: false,
+                message: 'Image filename is required'
+            });
+        }
+
+        // Construct the image URL
+        const image_url = `https://foodio-0x93.onrender.com/images/${image_filename}`;
+
+        const product = new Product({
+            id: id,
+            name: name,
+            image: image_url, // Use the constructed image_url
+            category: category,
+            price: price,
+        });
+
+        console.log(product);
+
+        await product.save();
+        console.log('Product saved');
+
+        res.json({
+            success: true,
+            name: name,
+        });
+    } catch (error) {
+        console.error('Error saving product:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+        });
+    }
+});
+
 
 app.post('/removeproduct', async (req,res)=>{
     await Product.findOneAndDelete({id: req.body.id});
