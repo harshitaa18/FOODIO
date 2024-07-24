@@ -30,9 +30,7 @@ app.get("/",(req,res)=>{
 
 const fs = require('fs');
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, uploadDir);  // Use the correct directory path
-    },
+    destination: ".upload/images",
     filename: (req, file, cb) => {
         const filePath = `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`;
         cb(null, filePath);
@@ -94,7 +92,7 @@ app.post('/addproduct',async (req,res)=>{
     const product = new Product ({
         id: id,
         name: req.body.name,
-        image: req.file.filename,
+        image: req.body.image,
         category: req.body.category,
         price: req.body.price,
     });
