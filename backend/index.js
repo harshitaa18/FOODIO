@@ -110,6 +110,7 @@ app.post('/addproduct', async (req, res) => {
 
         // Construct the image URL
         const image_url = `https://foodio-0x93.onrender.com/images/${image_filename}`;
+        image_url = image_url.replace('http://localhost:4000', 'https://foodio-0x93.onrender.com');
         
         const product = new Product({
             id: id,
