@@ -92,27 +92,6 @@ const Product = mongoose.model("Product",{
     },
 })
 
-app.get('/allproducts', async (req, res) => {
-    try {
-        // Query the database to fetch all products
-        const products = await Product.find(); // `Product` is your Mongoose model for products
-
-        // Send the fetched products in the response
-        res.json({
-            success: true,
-            products: products, // Array of product objects
-        });
-    } catch (error) {
-        console.error('Error fetching products:', error);
-
-        // Send an error response if something goes wrong
-        res.status(500).json({
-            success: false,
-            message: 'Failed to fetch products',
-        });
-    }
-});
-
 app.post('/addproduct', async (req, res) => {
     try {
         // Fetch existing products to determine the new product ID
@@ -168,6 +147,10 @@ app.post('/removeproduct', async (req,res)=>{
     })
 })
 
+app.get('/allproducts', async (req, res) => {
+    const response = await Product.find({});
+    res.send(response);
+});
 
 const Users = mongoose.model("Users",{
     name: {
