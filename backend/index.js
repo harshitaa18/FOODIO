@@ -35,30 +35,32 @@ app.get("/",(req,res)=>{
 })
 
 const fs = require('fs');
+const uploadDir = path.join(__dirname, 'upload', 'images');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// Configure multer storage
 const storage = multer.diskStorage({
-    destination: "upload/images",
+    destination: uploadDir,
     filename: (req, file, cb) => {
-        const filePath = `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`;
-        cb(null, filePath);
+        cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
     }
 });
 
+// Initialize multer
+const upload = multer({ storage });
 
-const upload = multer({storage:storage})
+// Serve static files from the 'upload/images' folder
+app.use('/images', express.static(uploadDir));
 
-//creating upload endpoint for images
-app.use('/images', (req, res, next) => {
-    console.log(`Serving static files from: ${path.join(__dirname, 'upload/images')}`);
-    next();
-}, express.static(path.join(__dirname, 'upload/images')));
-
-
-app.post("/upload",upload.single('product'),(req,res)=>{
+// Upload endpoint for images
+app.post("/upload", upload.single('product'), (req, res) => {
     res.json({
-        success:1,
-        image_url:`https://foodio-0x93.onrender.com/images/${req.file.filename}`
-    })
-})
+        success: 1,
+        image_url: `https://foodio-0x93.onrender.com/images/${req.file.filename}`
+    });
+});
 
 //schema for creating products
 const Product = mongoose.model("Product",{
@@ -110,8 +112,7 @@ app.post('/addproduct', async (req, res) => {
 
         // Construct the image URL
         const image_url = `https://foodio-0x93.onrender.com/images/${image_filename}`;
-        image_url = image_url.replace('http://localhost:4000', 'https://foodio-0x93.onrender.com');
-        
+
         const product = new Product({
             id: id,
             name: name,
