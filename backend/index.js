@@ -92,20 +92,22 @@ const Product = mongoose.model("Product",{
     },
 })
 
-const baseUrl = 'https://foodio-0x93.onrender.com/images/'; // Always use the production URL
-
 app.get('/allproducts', (req, res) => {
     Product.findAll()
         .then(products => {
-            // Add the base URL to the image path
+            // Update the image URL to replace localhost with the production URL
             products = products.map(product => {
-                product.image = `${baseUrl}${product.image}`;
+                // Replace localhost with the production URL
+                if (product.image) {
+                    product.image = product.image.replace('http://localhost:4000', 'https://foodio-0x93.onrender.com');
+                }
                 return product;
             });
             res.json(products);
         })
         .catch(err => res.status(500).json({ error: err.message }));
 });
+
 
 
 
