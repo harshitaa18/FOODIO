@@ -23,11 +23,10 @@ const ShopContextProvider = (props) => {
                 return resp.json();
             })
             .then((data) => {
-                if (data.products && Array.isArray(data.products)) {
-                    setallproduct(data.products);
-                }
-                
-                else {
+                if (Array.isArray(data)) {
+                    console.log("Fetched Products:", data);
+                    setallproduct(data);
+                } else {
                     console.error("Fetched data is not an array:", data);
                 }
             })

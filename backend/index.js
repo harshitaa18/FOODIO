@@ -92,26 +92,33 @@ const Product = mongoose.model("Product",{
     },
 })
 
-app.get('/allproducts', async (req, res) => {
-    try {
-        // Query the database to fetch all products
-        const products = await Product.find(); // `Product` is your Mongoose model for products
+// Assuming you're using Express for the backend
+app.get('/allproducts', (req, res) => {
+    // Assuming you're fetching products from a database
+    Product.find({}, (err, products) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
 
-        // Send the fetched products in the response
-        res.json({
-            success: true,
-            products: products, // Array of product objects
+        // Log the image URLs for debugging
+        products.forEach(product => {
+            // Log the URL being returned
+            console.log('Image URL for product:', product.image); // Log the image URL
         });
-    } catch (error) {
-        console.error('Error fetching products:', error);
 
-        // Send an error response if something goes wrong
-        res.status(500).json({
-            success: false,
-            message: 'Failed to fetch products',
+        // Map through products and return the correct image URL (assuming image is stored as filename)
+        const productsWithFullUrl = products.map(product => {
+            const imageUrl = `https://foodio-0x93.onrender.com/images/${product.image}`;
+            return {
+                ...product.toObject(),
+                image: imageUrl // Assign the full URL
+            };
         });
-    }
+
+        res.json(productsWithFullUrl);
+    });
 });
+
 
 app.post('/addproduct', async (req, res) => {
     try {
