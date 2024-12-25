@@ -30,7 +30,7 @@ app.get("/",(req,res)=>{
 
 const fs = require('fs');
 const storage = multer.diskStorage({
-    destination: ".upload/images",
+    destination: "upload/images",
     filename: (req, file, cb) => {
         const filePath = `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`;
         cb(null, filePath);
@@ -104,7 +104,7 @@ app.post('/addproduct', async (req, res) => {
 
         // Construct the image URL
         const image_url = `https://foodio-0x93.onrender.com/images/${image_filename}`;
-
+        
         const product = new Product({
             id: id,
             name: name,
